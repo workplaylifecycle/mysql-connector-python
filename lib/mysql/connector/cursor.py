@@ -326,6 +326,7 @@ class MySQLCursor(CursorBase):
         self._nextrow = (None, None)
         self._warnings = None
         self._warning_count = 0
+        self._info_msg = None
         self._executed = None
         self._executed_list = []
         self._binary = False
@@ -445,6 +446,7 @@ class MySQLCursor(CursorBase):
             self._rowcount = res['affected_rows']
             self._last_insert_id = res['insert_id']
             self._warning_count = res['warning_count']
+            self._info_msg = res['info_msg']
         except (KeyError, TypeError) as err:
             raise errors.ProgrammingError(
                 "Failed handling non-resultset; {0}".format(err))
